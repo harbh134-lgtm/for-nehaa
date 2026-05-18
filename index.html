@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Love You Neha ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #ffd6e8;
+    font-family: Arial, sans-serif;
+}
+
+/* ❤️ FLOATING HEARTS */
+.heart {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: pink;
+    transform: rotate(45deg);
+    animation: floatUp linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -25px;
+    left: 0;
+}
+
+.heart::after {
+    left: -25px;
+    top: 0;
+}
+
+/* floating animation */
+@keyframes floatUp {
+    from {
+        transform: translateY(100vh) rotate(45deg);
+    }
+    to {
+        transform: translateY(-120px) rotate(45deg);
+    }
+}
+
+/* ❤️ BIG TAP HEART */
+#tapHeart {
+    position: fixed;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 170px;
+    height: 170px;
+    background: #ff4f9a;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+}
+
+#tapHeart::before,
+#tapHeart::after {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    background: #ff4f9a;
+    border-radius: 50%;
+}
+
+#tapHeart::before {
+    top: -85px;
+    left: 0;
+}
+
+#tapHeart::after {
+    left: -85px;
+    top: 0;
+}
+
+/* text inside tap heart */
+#tapText {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-45deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* final message */
+#message {
+    display: none;
+    position: fixed;
+    top: 38%;
+    width: 100%;
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: #ff1f7a;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ❤️ TAP HEART -->
+<div id="tapHeart">
+    <div id="tapText">TAP ❤️</div>
+</div>
+
+<!-- 💖 MESSAGE -->
+<div id="message">
+    ❤️ I LOVE YOU NEHA ❤️
+</div>
+
+<!-- 🔊 POP SOUND -->
+<audio id="popSound">
+    <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* ❤️ CREATE FLOATING HEARTS */
+function spawnHeart() {
+    const h = document.createElement("div");
+    h.className = "heart";
+
+    h.style.left = Math.random() * 100 + "vw";
+
+    h.style.background =
+        "hsl(" + Math.random() * 360 + ", 80%, 75%)";
+
+    const speed = 4 + Math.random() * 3;
+    h.style.animationDuration = speed + "s";
+
+    document.body.appendChild(h);
+
+    setTimeout(() => {
+        h.remove();
+    }, speed * 1000);
+}
+
+/* ❤️ MANY HEARTS */
+setInterval(spawnHeart, 250);
+
+/* ❤️ TAP ACTION */
+const tapHeart = document.getElementById("tapHeart");
+const message = document.getElementById("message");
+const popSound = document.getElementById("popSound");
+
+tapHeart.addEventListener("click", () => {
+    popSound.play();
+
+    tapHeart.style.display = "none";
+
+    message.style.display = "block";
+});
+</script>
+
+</body>
+</html>
